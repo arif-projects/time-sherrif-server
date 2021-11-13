@@ -31,12 +31,13 @@ async function run() {
             const products = await cursor.toArray();
             res.send(products);
         })
-         //get all purchesedata
-         app.get('/purchesedata', async (req, res) => {
-            const cursor = shipmentCollection.find({});
-            const purchese = await cursor.toArray();
-            res.send(purchese);
-        })
+
+        //  //get all purchesedata
+        //  app.get('/purchesedata', async (req, res) => {
+        //     const cursor = shipmentCollection.find({});
+        //     const purchese = await cursor.toArray();
+        //     res.send(purchese);
+        // })
         
 
         //insert data
@@ -47,10 +48,7 @@ async function run() {
             res.json(result)
         });
 
-        //delete product
-        app.delete('/deleteproduct', async(req,res)=>{
-          
-        })
+
         
 
         //purchese item insert
