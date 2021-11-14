@@ -22,7 +22,8 @@ async function run() {
 
         const database = client.db('time-sheriff');//database name
         const productCollection = database.collection('products');//database collection name
-        const shipmentCollection = database.collection('purchese');
+        const shipmentCollection = database.collection('purchese');//shipment
+        const reviewCollection = database.collection('reviews');//user reviews
 
 
          //get all data
@@ -30,16 +31,9 @@ async function run() {
             const cursor = productCollection.find({});
             const products = await cursor.toArray();
             res.send(products);
-        })
+        });
 
-        //  //get all purchesedata
-        //  app.get('/purchesedata', async (req, res) => {
-        //     const cursor = shipmentCollection.find({});
-        //     const purchese = await cursor.toArray();
-        //     res.send(purchese);
-        // })
         
-
         //insert data
         app.post('/addProduct', async (req, res) => {
             const product = req.body;
@@ -57,6 +51,27 @@ async function run() {
             console.log(purchese);
             const result = await shipmentCollection.insertOne(purchese);
             res.json(result)
+        });
+
+        //get all purchesedata
+         app.get('/purchesedata', async (req, res) => {
+            const cursor = shipmentCollection.find({});
+            const purchese = await cursor.toArray();
+            res.send(purchese);
+        })
+
+        //insert review
+        app.post('/reviews', async (req, res) => {
+            const review = req.body;
+            const result = await reviewCollection.insertOne(review);
+            res.json(result)
+        });
+
+         //get all reviews
+         app.get('/reviewsdata', async (req, res) => {
+            const cursor = reviewCollection.find({});
+            const reviews = await cursor.toArray();
+            res.send(reviews);
         });
 
 
